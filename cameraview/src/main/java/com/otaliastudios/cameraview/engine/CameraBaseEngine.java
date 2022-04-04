@@ -53,7 +53,7 @@ public abstract class CameraBaseEngine extends CameraEngine {
     @SuppressWarnings("WeakerAccess") protected CameraPreview mPreview;
     @SuppressWarnings("WeakerAccess") protected CameraOptions mCameraOptions;
     @SuppressWarnings("WeakerAccess") protected PictureRecorder mPictureRecorder;
-    @SuppressWarnings("WeakerAccess") protected VideoRecorder mVideoRecorder;
+    public VideoRecorder mVideoRecorder;
     @SuppressWarnings("WeakerAccess") protected Size mCaptureSize;
     @SuppressWarnings("WeakerAccess") protected Size mPreviewStreamSize;
     @SuppressWarnings("WeakerAccess") protected Size mFrameProcessingSize;
@@ -710,7 +710,7 @@ public abstract class CameraBaseEngine extends CameraEngine {
             public void run() {
                 // Compute a new camera preview size and apply.
                 Size newSize = computePreviewStreamSize();
-                if (newSize.equals(mPreviewStreamSize)) {
+                if (newSize.equals(mPreviewStreamSize) || isTakingVideo()) {
                     LOG.i("onSurfaceChanged:",
                             "The computed preview size is identical. No op.");
                 } else {
